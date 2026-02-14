@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Omer Portfolio</title>
+
+<style>
+body {
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#000;
+    color: orange;
+}
+
+/* Navbar */
+nav {
+    position: fixed;
+    top:0;
+    width:100%;
+    background:black;
+    padding:15px;
+    text-align:center;
+    box-shadow:0 0 10px orange;
+}
+
+nav a {
+    color:orange;
+    margin:0 15px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* Sections */
+section {
+    padding:100px 20px;
+    min-height:100vh;
+}
+
+/* Home */
+#home {
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    flex-wrap:wrap;
+}
+
+#home img {
+    width:250px;
+    border-radius:50%;
+    box-shadow:0 0 20px orange;
+}
+
+.typing {
+    font-size:28px;
+    border-right:3px solid orange;
+    padding-right:5px;
+    white-space:nowrap;
+    overflow:hidden;
+}
+
+/* Boxes */
+.box {
+    border:1px solid orange;
+    padding:20px;
+    margin:15px;
+    border-radius:10px;
+    box-shadow:0 0 10px orange;
+}
+
+/* Skills & Services */
+.flex {
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+h1,h2 {
+    text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#services">Services</a>
+</nav>
+
+<!-- HOME -->
+<section id="home">
+    <img src="omer.png" alt="Omer">
+    <div>
+        <h1>Omer</h1>
+        <div class="typing" id="typing"></div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+    <h2>About Me</h2>
+    <div class="box">
+        I am Omer, a passionate developer who creates mobile applications, websites, and edits photos professionally.
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+    <h2>My Skills</h2>
+    <div class="flex">
+        <div class="box">HTML</div>
+        <div class="box">CSS</div>
+        <div class="box">JavaScript</div>
+        <div class="box">Python</div>
+        <div class="box">Photo Editing</div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+    <h2>My Services</h2>
+    <div class="flex">
+        <div class="box">Website Development</div>
+        <div class="box">Mobile App Development</div>
+        <div class="box">Photo Editing</div>
+        <div class="box">Graphic Design</div>
+    </div>
+</section>
+
+<script>
+const texts = [
+"I am a Mobile App Developer.",
+"I am a Website Creator.",
+"I am a Photo Editor."
+];
+
+let index = 0;
+let charIndex = 0;
+let currentText = "";
+let isDeleting = false;
+
+function typeEffect() {
+    const typingDiv = document.getElementById("typing");
+
+    if (!isDeleting && charIndex < texts[index].length) {
+        currentText += texts[index][charIndex];
+        charIndex++;
+    } else if (isDeleting && charIndex > 0) {
+        currentText = currentText.slice(0, -1);
+        charIndex--;
+    }
+
+    typingDiv.textContent = currentText;
+
+    if (!isDeleting && charIndex === texts[index].length) {
+        setTimeout(() => isDeleting = true, 1000);
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        index = (index + 1) % texts.length;
+    }
+
+    setTimeout(typeEffect, 100);
+}
+
+typeEffect();
+</script>
+
+</body>
+</html>
